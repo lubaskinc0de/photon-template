@@ -1,0 +1,6 @@
+@Photon.Web_HostAddress = http://localhost:5124
+
+GET {{Photon.Web_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
