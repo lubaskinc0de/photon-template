@@ -5,10 +5,11 @@ using Photon.Domain.Repository;
 using Photon.Infrastructure.Data;
 using Photon.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
+using Photon.Infrastructure.Adapter;
 
 namespace Photon.Infrastructure
 {
-    public class AppDI
+    public class AppDi
     {
         public static void Setup(IServiceCollection services)
         {
@@ -17,6 +18,7 @@ namespace Photon.Infrastructure
             services.AddScoped<IUserRepo, UserRepo>();
             services.AddScoped<IUoW, UoW>();
             services.AddScoped<CreateUser>();
+            services.AddSingleton<IPasswordHasher, IdentityPasswordHasher>();
         }
     }
 }

@@ -2,7 +2,7 @@ using Photon.Infrastructure;
 using Photon.Web.Route;
 
 var builder = WebApplication.CreateBuilder(args);
-AppDI.Setup(builder.Services);
+AppDi.Setup(builder.Services);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
