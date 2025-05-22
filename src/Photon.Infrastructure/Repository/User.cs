@@ -1,6 +1,7 @@
 using Photon.Domain.Entity;
 using Photon.Domain.Repository;
 using Photon.Infrastructure.Data;
+using Photon.Infrastructure.Model;
 
 namespace Photon.Infrastructure.Repository
 {
@@ -14,6 +15,14 @@ namespace Photon.Infrastructure.Repository
         public async Task<User?> GetByIdAsync(Guid id)
         {
             return await context.Users.FindAsync(id);
+        }
+    }
+
+    public class AuthUserRepo(ApplicationDbContext context)
+    {
+        public async Task AddAsync(AuthUser user)
+        {
+            await context.AuthUsers.AddAsync(user);
         }
     }
 }
