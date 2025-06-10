@@ -5,14 +5,19 @@ using Photon.Infrastructure.Data;
 using Photon.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Photon.Infrastructure.Adapter;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace Photon.Infrastructure
 {
-    public class AppDi
+    public class Injector
     {
-        public static void Setup(IServiceCollection services)
+        public static void Inject(IHostApplicationBuilder builder)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=app.db"));
+            var services = builder.Services;
+            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(
+                builder.Configuration.GetConnectionString("DefaultConnection")
+            ));
 
             services.AddScoped<IUserRepo, UserRepo>();
             services.AddScoped<IUoW, UoW>();

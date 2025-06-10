@@ -1,0 +1,33 @@
+services:
+    nginx:
+        extends:
+            file: docker-compose.base.yml
+            service: nginx
+        depends_on:
+            - api
+  
+    api:
+        extends:
+            file: docker-compose.base.yml
+            service: api
+        depends_on:
+            migrator:
+                condition: service_completed_successfully
+
+    migrator:
+        extends:
+            file: docker-compose.base.yml
+            service: migrator
+        depends_on:
+            db:
+                condition: service_healthy
+
+    db:
+        extends:
+            file: docker-compose.base.yml
+            service: db
+        volumes:
+            - db_data:/var/lib/postgresql/data/
+
+volumes:
+    db_data:

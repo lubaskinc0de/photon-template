@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Identity;
-using Photon.Infrastructure.Migrations;
+using Photon.Infrastructure.Model;
 
 
 namespace Photon.Infrastructure.Adapter
