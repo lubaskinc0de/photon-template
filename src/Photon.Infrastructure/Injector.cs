@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Photon.Infrastructure.Adapter;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
+using Photon.Application.User.Handler;
 
 namespace Photon.Infrastructure
 {
@@ -23,6 +24,7 @@ namespace Photon.Infrastructure
             services.AddScoped<IUoW, UoW>();
             services.AddSingleton<IPasswordHasher, IdentityPasswordHasher>();
             services.AddScoped<AuthUserRepo>();
+            services.AddScoped<CreateUser>();
         }
     }
 }

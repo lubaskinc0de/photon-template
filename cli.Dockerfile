@@ -1,22 +1,19 @@
-# Build stage
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /app
 
-# Copy solution and project files
-COPY Photon.sln .
+COPY src/Photon.Infrastructure/Photon.Infrastructure.csproj src/Photon.Infrastructure/
+COPY src/Photon.Cli/Photon.Cli.csproj src/Photon.Cli/
+COPY src/Photon.Application/Photon.Application.csproj src/Photon.Application/
+COPY src/Photon.Domain/Photon.Domain.csproj src/Photon.Domain/
+
+RUN dotnet restore src/Photon.Cli/Photon.Cli.csproj
+
 COPY src/ ./src
 
-# Restore dependencies
-RUN dotnet restore "src/Photon.Cli/Photon.Cli.csproj"
+WORKDIR /app/src/Photon.Cli
+RUN dotnet publish -c Release -o /app/publish
 
-# Publish stage
-FROM build AS publish
-WORKDIR "/app/src/Photon.Cli"
-RUN dotnet publish "Photon.Cli.csproj" -c Release -o /app/publish
-
-# Final stage
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
-EXPOSE 8000
-COPY --from=publish /app/publish/ .
+COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "Photon.Cli.dll"]

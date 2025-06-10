@@ -19,6 +19,8 @@ services:
         container_name: api
         extends:
             service: code
+        expose:
+          - 8080
         command: ["web"]
 
     migrator:
