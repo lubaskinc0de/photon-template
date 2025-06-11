@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Identity;
-using Photon.Infrastructure.Model;
 
 
 namespace Photon.Infrastructure.Adapter
 {
-    public class StubUser {}
+    public class StubUser { }
 
     public interface IPasswordHasher
     {
