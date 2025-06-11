@@ -4,24 +4,26 @@ using Photon.Infrastructure.Model;
 
 namespace Photon.Infrastructure.Adapter
 {
+    public class StubUser {}
+
     public interface IPasswordHasher
     {
-        string HashPassword(AuthUser user, string password);
-        bool IsValid(AuthUser user, string raw, string hashed);
+        string HashPassword(string password);
+        bool IsValid(string raw, string hashed);
     }
 
     public class IdentityPasswordHasher : IPasswordHasher
     {
-        private PasswordHasher<AuthUser> _passwordHasher = new();
+        private PasswordHasher<StubUser> _passwordHasher = new();
 
-        public string HashPassword(AuthUser user, string password)
+        public string HashPassword(string password)
         {
-            return _passwordHasher.HashPassword(user, password);
+            return _passwordHasher.HashPassword(new StubUser(), password);
         }
 
-        public bool IsValid(AuthUser user, string raw, string hashed)
+        public bool IsValid(string raw, string hashed)
         {
-            return _passwordHasher.VerifyHashedPassword(user, hashed, raw) == PasswordVerificationResult.Success;
+            return _passwordHasher.VerifyHashedPassword(new StubUser(), hashed, raw) == PasswordVerificationResult.Success;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Photon.Application.User.Handler
 {
     public class CreateUser(IUserRepo repo, IUoW uow, IAuthProvider authProvider)
     {
-        public async Task<Guid> Handle(CreateUserDto data)
+        public async Task<Guid> HandleAsync(CreateUserDto data)
         {
             var user = new Domain.Entity.User(data.Username);
 

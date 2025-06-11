@@ -1,5 +1,5 @@
-using Photon.Application.User;
-using Photon.Application.User.Handler;
+using Photon.Infrastructure.Adapter;
+using Photon.Infrastructure.Service;
 
 namespace Photon.Web.Route
 {
@@ -7,9 +7,9 @@ namespace Photon.Web.Route
     {
         public static void MapUser(this WebApplication app)
         {
-            app.MapPost("/users", async (CreateUserDto dto, CreateUser handler) =>
+            app.MapPost("/users", async (AuthUserCredentials dto, RegisterUser handler) =>
             {
-                var id = await handler.Handle(dto);
+                var id = await handler.HandleAsync(dto);
                 return Results.Ok(new { Id = id });
             });
         }
