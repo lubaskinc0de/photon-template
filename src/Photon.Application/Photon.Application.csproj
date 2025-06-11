@@ -4,6 +4,9 @@
     <ProjectReference Include="..\Photon.Domain\Photon.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

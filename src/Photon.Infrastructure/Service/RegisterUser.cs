@@ -1,0 +1,4 @@
+namespace Photon.Infrastructure.Service
+{
+    
+}
